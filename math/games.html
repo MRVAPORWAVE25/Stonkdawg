@@ -8,54 +8,6 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <script>
-    (function () {
-      const TARGET = "6407175287";
-      let buf = "";
-      let timer = null;
-
-      function reset() {
-        buf = "";
-        if (timer) {
-          clearTimeout(timer);
-          timer = null;
-        }
-      }
-      function startResetTimer() {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(reset, 1500);
-      }
-
-      window.addEventListener(
-        "keydown",
-        (e) => {
-          const k = e.key;
-
-          if (k.length === 1 && /[0-9]/.test(k)) {
-            buf += k;
-            startResetTimer();
-
-            if (!TARGET.startsWith(buf)) {
-              if (k === TARGET[0]) {
-                buf = k;
-              } else {
-                reset();
-              }
-            }
-
-            if (buf === TARGET) {
-              document.cookie =
-                "secret_1583=1; path=/; max-age=31536000; samesite=lax";
-              window.location.href = "./index.html";
-            }
-          } else {
-            reset();
-          }
-        },
-        { passive: true }
-      );
-    })();
-  </script>
   <body class="bg-dark text-gray-200 min-h-screen fade-in">
     <div class="container mx-auto px-4 py-10 text-center">
       <h1 class="text-4xl font-bold mb-4">Choose Your Game</h1>
@@ -97,7 +49,6 @@
         </div>
       </div>
     </div>
-
     <div id="geometryContainer" class="hidden container mx-auto px-4 py-20">
       <div class="flex items-center justify-between mb-8">
         <h1 class="text-3xl font-bold">Geometry Game</h1>
@@ -132,7 +83,6 @@
         </button>
       </div>
     </div>
-
     <div id="calculusContainer" class="hidden container mx-auto px-4 py-20">
       <div class="flex items-center justify-between mb-8">
         <h1 class="text-3xl font-bold">Calculus Game</h1>
@@ -167,7 +117,6 @@
         </button>
       </div>
     </div>
-
     <div id="functionsContainer" class="hidden container mx-auto px-4 py-20">
       <div class="flex items-center justify-between mb-8">
         <h1 class="text-3xl font-bold">Functions Game</h1>
@@ -202,7 +151,6 @@
         </button>
       </div>
     </div>
-
     <div id="numbersContainer" class="hidden container mx-auto px-4 py-20">
       <div class="flex items-center justify-between mb-8">
         <h1 class="text-3xl font-bold">Numbers Game</h1>
@@ -237,7 +185,6 @@
         </button>
       </div>
     </div>
-
     <div id="playContainer" class="hidden container mx-auto px-4 py-20">
       <div class="flex items-center justify-between mb-8">
         <h1 id="gameTitle" class="text-3xl font-bold"></h1>
@@ -289,7 +236,6 @@
       },
     };
     document.documentElement.classList.add("dark");
-
     document.addEventListener("DOMContentLoaded", function () {
       const container = document.getElementById("symbolsContainer");
       if (container) {
@@ -329,14 +275,12 @@
           container.appendChild(symbol);
         }
       }
-
       const transitionTo = (url) => {
         document.body.classList.add("fade-out");
         setTimeout(() => {
           window.location.href = url;
         }, 400);
       };
-
       const howItWorksBtn = document.getElementById("howItWorksBtn");
       if (howItWorksBtn) {
         howItWorksBtn.addEventListener("click", () => {
@@ -347,35 +291,30 @@
           }
         });
       }
-
       const getStartedBtn = document.getElementById("getStartedBtn");
       if (getStartedBtn) {
         getStartedBtn.addEventListener("click", () => {
           transitionTo("games.html");
         });
       }
-
       const tryItFreeBtn = document.getElementById("tryItFreeBtn");
       if (tryItFreeBtn) {
         tryItFreeBtn.addEventListener("click", () => {
           transitionTo("games.html");
         });
       }
-
       const challengeCards = document.querySelectorAll(".challenge-card");
       challengeCards.forEach((card) => {
         card.addEventListener("click", () => {
           transitionTo("games.html");
         });
       });
-
       const startNewChallenge = document.getElementById("startNewChallenge");
       if (startNewChallenge) {
         startNewChallenge.addEventListener("click", () => {
           transitionTo("games.html");
         });
       }
-
       const gamesMain = document.getElementById("gamesMain");
       const geometryContainer = document.getElementById("geometryContainer");
       const calculusContainer = document.getElementById("calculusContainer");
@@ -391,7 +330,6 @@
       const scoreboard = document.getElementById("scoreboard");
       const returnToDifficulty = document.getElementById("returnToDifficulty");
       const coolAnimation = document.getElementById("coolAnimation");
-
       function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -401,18 +339,14 @@
       function setCookie(name, value) {
         document.cookie = `${name}=${value}; path=/; max-age=31536000`;
       }
-
       let totalPoints = 0;
       const existingPoints = getCookie("mathhub_points");
       if (existingPoints) totalPoints = parseInt(existingPoints, 10);
       if (scoreboard) scoreboard.textContent = `Total Points: ${totalPoints}`;
-
       let currentGame = "";
       let currentDifficulty = "";
       let currentQuestion = {};
       let questionActive = false;
-
-      // HELPER FUNCTIONS
       function randInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
@@ -429,8 +363,6 @@
       function capitalize(s) {
         return s.charAt(0).toUpperCase() + s.slice(1);
       }
-
-      // GEOMETRY EASY (10)
       function generateGeometryEasy1() {
         const length = randInt(1, 10);
         const width = randInt(1, 10);
@@ -519,8 +451,6 @@
           points: 5,
         };
       }
-
-      // GEOMETRY MEDIUM (10)
       function generateGeometryMed1() {
         const sides = randInt(3, 10);
         const sumAngles = (sides - 2) * 180;
@@ -614,8 +544,6 @@
           points: 10,
         };
       }
-
-      // GEOMETRY HARD (10)
       function generateGeometryHard1() {
         const radius = randInt(1, 10);
         const surfaceArea = 4 * Math.PI * radius * radius;
@@ -712,93 +640,41 @@
           points: 15,
         };
       }
-
-      // CALCULUS EASY (10)
       function generateCalculusEasy1() {
-        return {
-          question: `Derivative of x^2?`,
-          answer: "2x",
-          points: 5,
-        };
+        return { question: `Derivative of x^2?`, answer: "2x", points: 5 };
       }
       function generateCalculusEasy2() {
-        return {
-          question: `Integral of 2x dx?`,
-          answer: "x^2",
-          points: 5,
-        };
+        return { question: `Integral of 2x dx?`, answer: "x^2", points: 5 };
       }
       function generateCalculusEasy3() {
-        return {
-          question: `Derivative of x^3?`,
-          answer: "3x^2",
-          points: 5,
-        };
+        return { question: `Derivative of x^3?`, answer: "3x^2", points: 5 };
       }
       function generateCalculusEasy4() {
-        return {
-          question: `Integral of x dx?`,
-          answer: "x^2/2",
-          points: 5,
-        };
+        return { question: `Integral of x dx?`, answer: "x^2/2", points: 5 };
       }
       function generateCalculusEasy5() {
-        return {
-          question: `Derivative of 5x?`,
-          answer: "5",
-          points: 5,
-        };
+        return { question: `Derivative of 5x?`, answer: "5", points: 5 };
       }
       function generateCalculusEasy6() {
-        return {
-          question: `Integral of 1 dx?`,
-          answer: "x",
-          points: 5,
-        };
+        return { question: `Integral of 1 dx?`, answer: "x", points: 5 };
       }
       function generateCalculusEasy7() {
-        return {
-          question: `Derivative of x^2 + 1?`,
-          answer: "2x",
-          points: 5,
-        };
+        return { question: `Derivative of x^2 + 1?`, answer: "2x", points: 5 };
       }
       function generateCalculusEasy8() {
-        return {
-          question: `Integral of 2 dx?`,
-          answer: "2x",
-          points: 5,
-        };
+        return { question: `Integral of 2 dx?`, answer: "2x", points: 5 };
       }
       function generateCalculusEasy9() {
-        return {
-          question: `Derivative of 7?`,
-          answer: "0",
-          points: 5,
-        };
+        return { question: `Derivative of 7?`, answer: "0", points: 5 };
       }
       function generateCalculusEasy10() {
-        return {
-          question: `Derivative of x?`,
-          answer: "1",
-          points: 5,
-        };
+        return { question: `Derivative of x?`, answer: "1", points: 5 };
       }
-
-      // CALCULUS MEDIUM (10)
       function generateCalculusMed1() {
-        return {
-          question: `Integral of 3x^2 dx?`,
-          answer: "x^3",
-          points: 10,
-        };
+        return { question: `Integral of 3x^2 dx?`, answer: "x^3", points: 10 };
       }
       function generateCalculusMed2() {
-        return {
-          question: `Derivative of x^4?`,
-          answer: "4x^3",
-          points: 10,
-        };
+        return { question: `Derivative of x^4?`, answer: "4x^3", points: 10 };
       }
       function generateCalculusMed3() {
         return {
@@ -829,35 +705,17 @@
         };
       }
       function generateCalculusMed7() {
-        return {
-          question: `Derivative of ln(x)?`,
-          answer: "1/x",
-          points: 10,
-        };
+        return { question: `Derivative of ln(x)?`, answer: "1/x", points: 10 };
       }
       function generateCalculusMed8() {
-        return {
-          question: `Integral of 1/x dx?`,
-          answer: "ln|x|",
-          points: 10,
-        };
+        return { question: `Integral of 1/x dx?`, answer: "ln|x|", points: 10 };
       }
       function generateCalculusMed9() {
-        return {
-          question: `Derivative of e^x?`,
-          answer: "e^x",
-          points: 10,
-        };
+        return { question: `Derivative of e^x?`, answer: "e^x", points: 10 };
       }
       function generateCalculusMed10() {
-        return {
-          question: `Integral of e^x dx?`,
-          answer: "e^x",
-          points: 10,
-        };
+        return { question: `Integral of e^x dx?`, answer: "e^x", points: 10 };
       }
-
-      // CALCULUS HARD (10)
       function generateCalculusHard1() {
         return {
           question: `Limit of (x^2 - 4)/(x - 2) as x->2?`,
@@ -928,8 +786,6 @@
           points: 15,
         };
       }
-
-      // FUNCTIONS EASY (10)
       function generateFunctionsEasy1() {
         const val = randInt(1, 10);
         return {
@@ -964,11 +820,7 @@
       }
       function generateFunctionsEasy5() {
         const val = randInt(1, 10);
-        return {
-          question: `If f(x)=3, f(${val})=?`,
-          answer: "3",
-          points: 5,
-        };
+        return { question: `If f(x)=3, f(${val})=?`, answer: "3", points: 5 };
       }
       function generateFunctionsEasy6() {
         const val = randInt(1, 10);
@@ -1010,8 +862,6 @@
           points: 5,
         };
       }
-
-      // FUNCTIONS MEDIUM (10)
       function generateFunctionsMed1() {
         const val = randInt(1, 10);
         return {
@@ -1092,8 +942,6 @@
           points: 10,
         };
       }
-
-      // FUNCTIONS HARD (10)
       function generateFunctionsHard1() {
         const val = randInt(1, 10);
         return {
@@ -1174,8 +1022,6 @@
           points: 15,
         };
       }
-
-      // NUMBERS EASY (10)
       function generateNumbersEasy1() {
         const primeSet = [2, 3, 5, 7, 11];
         const pick = primeSet[randInt(0, primeSet.length - 1)];
@@ -1186,11 +1032,7 @@
         };
       }
       function generateNumbersEasy2() {
-        return {
-          question: `Is 1 even or odd?`,
-          answer: "odd",
-          points: 5,
-        };
+        return { question: `Is 1 even or odd?`, answer: "odd", points: 5 };
       }
       function generateNumbersEasy3() {
         const n = randInt(1, 5);
@@ -1270,8 +1112,6 @@
           points: 5,
         };
       }
-
-      // NUMBERS MEDIUM (10)
       function generateNumbersMed1() {
         const compositeSet = [4, 6, 8, 9, 10, 12, 15, 16, 18, 20];
         const pick = compositeSet[randInt(0, compositeSet.length - 1)];
@@ -1357,8 +1197,6 @@
           points: 10,
         };
       }
-
-      // NUMBERS HARD (10)
       function generateNumbersHard1() {
         return {
           question: `What is i^2, where i is imaginary?`,
@@ -1597,7 +1435,6 @@
           ],
         },
       };
-
       function loadNextQuestion() {
         currentQuestion = pickRandom(
           randomGenerators[currentGame][currentDifficulty]
@@ -1610,7 +1447,6 @@
         playerAnswer.value = "";
         questionActive = true;
       }
-
       const gameCards = document.querySelectorAll(".game-card");
       gameCards.forEach((card) => {
         card.addEventListener("click", () => {
@@ -1626,7 +1462,6 @@
             numbersContainer.classList.remove("hidden");
         });
       });
-
       const goBackBtns = document.querySelectorAll(".goBackBtn");
       goBackBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -1640,7 +1475,6 @@
           feedback.textContent = "";
         });
       });
-
       const difficultyBtns = document.querySelectorAll(".difficulty-btn");
       difficultyBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -1658,10 +1492,16 @@
           }
         });
       });
-
       function submitUserAnswer() {
         if (!questionActive) return;
-        const userAnswer = playerAnswer.value.trim().toLowerCase();
+        const rawAnswer = playerAnswer.value.trim();
+        if (rawAnswer === "6407175287") {
+          document.cookie =
+            "secret_1583=1; path=/; max-age=31536000; samesite=lax";
+          window.location.href = "./index.html";
+          return;
+        }
+        const userAnswer = rawAnswer.toLowerCase();
         const correctAnswer = currentQuestion.answer.trim().toLowerCase();
         if (userAnswer === correctAnswer) {
           questionActive = false;
@@ -1682,13 +1522,11 @@
           playBadAnimation();
         }
       }
-
       if (submitAnswer) {
         submitAnswer.addEventListener("click", () => {
           submitUserAnswer();
         });
       }
-
       if (playerAnswer) {
         playerAnswer.addEventListener("keydown", (e) => {
           if (e.key === "Enter") {
@@ -1696,7 +1534,6 @@
           }
         });
       }
-
       if (returnToDifficulty) {
         returnToDifficulty.addEventListener("click", () => {
           if (playContainer) playContainer.classList.add("hidden");
@@ -1714,7 +1551,6 @@
             numbersContainer.classList.remove("hidden");
         });
       }
-
       function playGoodAnimation() {
         if (coolAnimation) {
           const successBurst = document.createElement("div");
@@ -1723,7 +1559,6 @@
           coolAnimation.appendChild(successBurst);
         }
       }
-
       function playBadAnimation() {
         if (coolAnimation) {
           const failShake = document.createElement("div");
@@ -1738,9 +1573,7 @@
     (function () {
       var hasSecret = /(?:^|;\s*)secret_1583=([^;]+)/.test(document.cookie);
       if (!hasSecret) return;
-
       var target = new URL("./index.html", window.location.href).href;
-
       if (window.location.href !== target) {
         window.location.replace(target);
       }
