@@ -1,4 +1,5 @@
 export default [
+  { href: './html/Hasty shaman/index.html', imgSrc: 'hasty shaman.jpeg', name: 'Hasty shaman' , 'page': 5, 'id': 867 },
   { href: './html/Indian truck simulator/index.html', imgSrc: 'indian truck simulator.jpeg', name: 'Indian truck simulator' , 'page': 5, 'id': 879 },
   { href: './html/Jelly Bots/index.html', imgSrc: 'jelly bots.jpeg', name: 'Jelly Bots' , 'page': 5, 'id': 891 },
   { href: './html/Jolly world/index.html', imgSrc: 'jolly world.jpeg', name: 'Jolly world' , 'page': 5, 'id': 893 },
