@@ -1,4 +1,5 @@
 export default [
+  { href: './html/One trick mage/index.html', imgSrc: 'one trick mage.jpeg', name: 'One trick mage' , 'page': 5, 'id': 912 },
   { href: './html/Orcs vs elves/index.html', imgSrc: 'orcs vs elves.jpeg', name: 'Orcs vs elves' , 'page': 5, 'id': 924 },
   { href: './html/Rodha/index.html', imgSrc: 'rodha.jpeg', name: 'Rodha' , 'page': 5, 'id': 931 },
   { href: './html/Rubix/index.html', imgSrc: 'rubix.jpeg', name: 'Rubix' , 'page': 5, 'id': 939 },
